@@ -4,6 +4,7 @@ var $journalEntry = document.querySelector('form');
 var $title = document.querySelector('.title-text');
 var $notes = document.querySelector('.notes-text');
 var newObject = {};
+var dataJSON;
 
 $imageLink.addEventListener('input', updateImage);
 
@@ -15,12 +16,19 @@ $journalEntry.addEventListener('submit', newEntry);
 
 function newEntry(event) {
   event.preventDefault();
-  newObject.title = $title.value;
-  newObject.image = $imageLink.value;
-  newObject.notes = $notes.value;
-  newObject.id = data.nextEntryId;
+  newObject = {
+    title: $title.value,
+    image: $imageLink.value,
+    notes: $notes.value,
+    id: data.nextEntryId
+  };
+
   data.nextEntryId++;
   data.entries.unshift(newObject);
   $image.src = 'images/placeholder-image-square.jpg';
   $journalEntry.reset();
+
+  dataJSON = JSON.stringify(data);
+  window.localStorage.setItem('data-model', dataJSON);
+
 }
