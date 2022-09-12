@@ -2,26 +2,42 @@
   font-family: sans-serif;
 }
 
-.heading {
+header {
   background-color: #4b2373;
   color: white;
   font-weight: lighter;
+}
+
+body {
+  background-color: rgb(248, 248, 248);
 }
 
 label {
   font-size: 0.9rem;
 }
 
-input {
-  margin-top: 6px;
+img {
+  width: 100%;
   margin-bottom: 20px;
-  padding-left: 0;
+}
+
+input,
+textarea {
+  margin-top: 6px;
+  margin-bottom: 15px;
+  padding-left: 6px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  border: solid;
+  border-color: lightgray;
+  border-radius: 0.2rem;
+  border-width: 1px;
 }
 
 textarea {
-  margin-top: 6px;
   height: 8rem;
-  margin-bottom: 8px;
+  width: 100%;
 }
 
 .save {
@@ -30,13 +46,13 @@ textarea {
   padding: 5px 10px;
   border-radius: 0.2rem;
   border: none;
+  display: block;
+  float: right;
 }
 
-.align-right {
-  text-align: right;
-}
-
-input:active {
-  border: solid;
+input:focus,
+textarea:focus {
   border-color: #4b2373;
+  border-width: 2px;
+  outline: none;
 }

@@ -17,39 +17,43 @@
 </head>
 <body>
   <header>
+    <div class="container">
+      <div class="row heading">
+        <div class="column-full">
+          <p>Code Journal</p>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
-    <div class="container" data-view="entry-form">
-      <div class="row heading">
-        <p>Code Journal</p>
-      </div>
+    <div data-view="entry-form" class="container">
       <div class="row">
-        <h2>New Entry</h2>
+        <div class="column-full">
+          <h2>New Entry</h2>
+        </div>
       </div>
       <form>
-        <div>
-          <img src="images/placeholder-image-square.jpg" class="image column-full column-half">
+        <div class="row">
+          <div class="column-full column-half">
+            <img src="images/placeholder-image-square.jpg" class="image">
+          </div>
+          <div class="column-full column-half">
+            <label for="title">Title</label>
+            <div>
+              <input type="text" required class="title-text">
+            </div>
+            <label for="photo">Photo URL</label>
+            <div>
+              <input type="text" required class="image-link">
+            </div>
+          </div>
         </div>
-        <div>
-          <label for="title">Title</label>
-        </div>
-        <div>
-          <input type="text" required class="column-full column-half">
-        </div>
-        <div>
-          <label for="photo">Photo URL</label>
-        </div>
-        <div>
-          <input type="text" required class="image-link column-full column-half">
-        </div>
-        <div>
-          <label for="notes">Notes</label>
-        </div>
-        <div>
-          <textarea required class="column-full column-half"></textarea>
-        </div>
-        <div class="align-right">
-          <input type="submit" name="submit" value="SAVE" class="save">
+        <div class="row">
+          <div class="column-full notes">
+            <label for="notes">Notes</label>
+            <textarea required></textarea>
+            <button class="save">SAVE</button>
+          </div>
         </div>
       </form>
     </div>
