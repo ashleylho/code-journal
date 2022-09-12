@@ -1,0 +1,42 @@
+* {
+  font-family: sans-serif;
+}
+
+.heading {
+  background-color: #4b2373;
+  color: white;
+  font-weight: lighter;
+}
+
+label {
+  font-size: 0.9rem;
+}
+
+input {
+  margin-top: 6px;
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+textarea {
+  margin-top: 6px;
+  height: 8rem;
+  margin-bottom: 8px;
+}
+
+.save {
+  background-color: #4b2373;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 0.2rem;
+  border: none;
+}
+
+.align-right {
+  text-align: right;
+}
+
+input:active {
+  border: solid;
+  border-color: #4b2373;
+}
