@@ -26,9 +26,10 @@ function newEntry(event) {
   data.nextEntryId++;
   data.entries.unshift(newObject);
   $image.src = 'images/placeholder-image-square.jpg';
-  $journalEntry.reset();
 
   dataJSON = JSON.stringify(data);
   window.localStorage.setItem('data-model', dataJSON);
+
+  $journalEntry.reset();
 
 }

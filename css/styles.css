@@ -16,9 +16,10 @@ label {
   font-size: 0.9rem;
 }
 
-img {
+.image {
   width: 100%;
-  margin-bottom: 20px;
+  object-fit: cover;
+  margin-bottom: 15px;
 }
 
 input,
@@ -48,6 +49,7 @@ textarea {
   border: none;
   display: block;
   float: right;
+  margin-bottom: 15px;
 }
 
 input:focus,
