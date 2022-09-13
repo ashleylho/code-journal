@@ -5,6 +5,7 @@
 header {
   background-color: #4b2373;
   color: white;
+  padding: 15px 0;
 }
 
 body {
@@ -12,12 +13,19 @@ body {
 }
 
 .header {
-  font-size: 1rem;
+  font-weight: 100;
+  display: inline;
 }
 
 label,
 p {
   font-size: 0.9rem;
+}
+
+a {
+  padding-left: 20px;
+  color: white;
+  text-decoration: none;
 }
 
 .image {
@@ -57,10 +65,6 @@ button {
   margin-bottom: 15px;
 }
 
-.inline {
-  display: inline;
-}
-
 input:focus,
 textarea:focus {
   border-color: #4b2373;
@@ -74,6 +78,7 @@ ul {
 
 .entry-title {
   margin-top: 0;
+  font-weight: 500;
 }
 
 p {
@@ -82,4 +87,13 @@ p {
 
 .entry {
   margin-bottom: 25px;
+}
+
+.inline {
+  display: inline;
+  font-weight: 500;
+}
+
+.entries-header {
+  margin-top: 20px;
 }

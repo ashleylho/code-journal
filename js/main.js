@@ -2,6 +2,8 @@ var $image = document.querySelector('.image');
 var $imageLink = document.querySelector('.image-link');
 var $journalEntry = document.querySelector('form');
 
+// create entry js
+
 $imageLink.addEventListener('input', updateImage);
 
 function updateImage(event) {
@@ -14,8 +16,7 @@ function newEntry(event) {
   event.preventDefault();
   var $title = document.querySelector('.title-text');
   var $notes = document.querySelector('.notes-text');
-  var newObject = {};
-  newObject = {
+  var newObject = {
     title: $title.value,
     image: $imageLink.value,
     notes: $notes.value,
@@ -29,3 +30,48 @@ function newEntry(event) {
   $journalEntry.reset();
 
 }
+
+// view entries js
+
+function renderEntry(entry) {
+  var li = document.createElement('li');
+
+  var rowDiv = document.createElement('div');
+  rowDiv.className = 'row entry';
+  li.appendChild(rowDiv);
+
+  var columnDiv = document.createElement('div');
+  columnDiv.className = 'column-full column-half';
+  rowDiv.appendChild(columnDiv);
+
+  var img = document.createElement('img');
+  img.className = 'image';
+  img.setAttribute('src', entry.image);
+  columnDiv.appendChild(img);
+
+  var columnDiv2 = document.createElement('div');
+  columnDiv2.className = 'column-full column-half';
+  rowDiv.appendChild(columnDiv2);
+
+  var h2 = document.createElement('h2');
+  var h2Text = document.createTextNode(entry.title);
+  h2.className = 'entry-title';
+  h2.appendChild(h2Text);
+  columnDiv2.appendChild(h2);
+
+  var p = document.createElement('p');
+  var p2Text = document.createTextNode(entry.notes);
+  p.appendChild(p2Text);
+  columnDiv2.appendChild(p);
+  return li;
+}
+
+var $entryList = document.querySelector('ul');
+
+function renderEvent(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    $entryList.appendChild(renderEntry(data.entries[i]));
+  }
+}
+
+document.addEventListener('DOMContentLoaded', renderEvent);
