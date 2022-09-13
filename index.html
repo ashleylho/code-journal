@@ -34,24 +34,24 @@
       </div>
       <form>
         <div class="row">
-          <div class="column-full column-half img-container">
-            <img src="images/placeholder-image-square.jpg" class="image">
+          <div class="column-full column-half">
+            <img src="images/placeholder-image-square.jpg" class="image" alt="placeholder-image">
           </div>
           <div class="column-full column-half">
             <label for="title">Title</label>
             <div>
-              <input type="text" required class="title-text">
+              <input type="text" required id="title" class="title-text">
             </div>
-            <label for="photo">Photo URL</label>
+            <label for="image">Photo URL</label>
             <div>
-              <input type="text" required class="image-link">
+              <input type="text" id="image" required class="image-link">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="column-full notes">
             <label for="notes">Notes</label>
-            <textarea required class="notes-text"></textarea>
+            <textarea required id="notes" class="notes-text"></textarea>
             <button class="save">SAVE</button>
           </div>
         </div>

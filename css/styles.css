@@ -20,6 +20,7 @@ label {
   width: 100%;
   object-fit: cover;
   margin-bottom: 15px;
+  height: 300px;
 }
 
 input,
@@ -33,7 +34,7 @@ textarea {
   border: solid;
   border-color: lightgray;
   border-radius: 0.2rem;
-  border-width: 1px;
+  border-width: 2px;
 }
 
 textarea {
