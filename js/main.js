@@ -1,8 +1,11 @@
 var $image = document.querySelector('.image');
 var $imageLink = document.querySelector('.image-link');
 var $journalEntry = document.querySelector('form');
+var $newEntryContainer = document.querySelector('.new-entries');
+var $entriesContainer = document.querySelector('.entries');
+var $body = document.querySelector('body');
 
-// create entry js
+// create entry
 
 $imageLink.addEventListener('input', updateImage);
 
@@ -31,7 +34,7 @@ function newEntry(event) {
 
 }
 
-// view entries js
+// view entries
 
 function renderEntry(entry) {
   var li = document.createElement('li');
@@ -75,3 +78,27 @@ function renderEvent(event) {
 }
 
 document.addEventListener('DOMContentLoaded', renderEvent);
+
+// viewswapping
+$body.addEventListener('click', viewSwap);
+
+function viewSwap(event) {
+  var $view = document.querySelectorAll('[data-view]');
+  for (var i = 0; i < $view.length; i++) {
+    if ($view[i] === $entriesContainer) {
+      $newEntryContainer.className = 'container new-entries hidden';
+      $entriesContainer.className = 'container entries';
+    } else {
+      $entriesContainer.className = 'container entries hidden';
+      $newEntryContainer.className = 'container new-entries';
+    }
+  }
+  // if (event.target.matches('.save') || event.target.matches('.entries-link')) {
+  //   $newEntryContainer.className = 'container new-entries hidden';
+  //   $entriesContainer.className = 'container entries';
+  // } else {
+  //   $entriesContainer.className = 'container entries hidden';
+  //   $newEntryContainer.className = 'container new-entries';
+  // }
+
+}

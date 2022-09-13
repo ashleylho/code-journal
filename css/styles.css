@@ -22,7 +22,7 @@ p {
   font-size: 0.9rem;
 }
 
-a {
+.entries-link {
   padding-left: 20px;
   color: white;
   text-decoration: none;
@@ -63,6 +63,16 @@ button {
   display: block;
   float: right;
   margin-bottom: 15px;
+}
+
+.new {
+  float: right;
+  text-decoration: none;
+  background-color: #4b2373;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 0.2rem;
+  border: none;
 }
 
 input:focus,
