@@ -1,6 +1,8 @@
 var $image = document.querySelector('.image');
 var $imageLink = document.querySelector('.image-link');
 var $journalEntry = document.querySelector('form');
+var $titleInput = document.querySelector('.title-text');
+var $notes = document.querySelector('.notes-text');
 
 // create entry
 
@@ -119,7 +121,12 @@ function entriesView(event) {
 
 function formView(event) {
   // updated to show the entry form if an edit icon was clicked
-  if (event.target.matches('.new') || event.target.matches('i')) {
+  if (event.target.matches('.new')) {
+    $entries.className = 'container entries';
+    $form.className = 'container new-entries hidden';
+    $journalEntry.reset();
+    $image.src = 'images/placeholder-image-square.jpg';
+  } else if (event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
   }
@@ -137,8 +144,12 @@ function edit(event) {
   for (var i = 0; i < $li.length; i++) {
     if (closestId === $li[i]) {
       data.editing = data.entries[i];
+      // pre-populate the entry form with the clicked entry's values from the object found in the data model
+      $imageLink.value = data.entries[i].image;
+      $titleInput.value = data.entries[i].title;
+      $notes.value = data.entries[i].notes;
+      $image.src = data.entries[i].image;
     }
   }
-  // pre-populate the entry form with the clicked entry's values from the object found in the data model
 
 }
