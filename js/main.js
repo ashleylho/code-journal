@@ -100,6 +100,7 @@ function entriesView(event) {
     $form.className = 'container new-entries';
     $entries.className = 'container entries hidden';
   }
+  data.view = 'entries';
 }
 
 $new.addEventListener('click', formView);
@@ -109,4 +110,5 @@ function formView(event) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
   }
+  data.view = 'entry-form';
 }
