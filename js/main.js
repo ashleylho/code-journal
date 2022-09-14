@@ -26,9 +26,8 @@ function newEntry(event) {
   data.nextEntryId++;
   data.entries.unshift(newObject);
   $image.src = 'images/placeholder-image-square.jpg';
-
   $journalEntry.reset();
-
+  prepend();
 }
 
 // view entries
@@ -90,8 +89,6 @@ function prepend(event) {
   $form.className = 'container new-entries';
   $entries.className = 'container entries hidden';
 }
-
-$journalEntry.addEventListener('submit', prepend);
 
 // viewswapping
 
