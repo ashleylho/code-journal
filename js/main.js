@@ -131,4 +131,14 @@ $entryList.addEventListener('click', edit);
 
 function edit(event) {
   formView(event);
+  // find the matching entry object in the data model & assign it to the data model's editing property
+  var $li = document.querySelectorAll('[data-entry-id]');
+  var closestId = event.target.closest('[data-entry-id]');
+  for (var i = 0; i < $li.length; i++) {
+    if (closestId === $li[i]) {
+      data.editing = data.entries[i];
+    }
+  }
+  // pre-populate the entry form with the clicked entry's values from the object found in the data model
+
 }
