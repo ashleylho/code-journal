@@ -20,13 +20,14 @@
     <div class="container">
       <div class="row heading">
         <div class="column-full">
-          <p>Code Journal</p>
+          <h3 class="header">Code Journal</h3>
+          <a href="#" class="entries-link">Entries</a>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div data-view="entry-form" class="container">
+    <div data-view="entry-form" class="container new-entries">
       <div class="row">
         <div class="column-full">
           <h2>New Entry</h2>
@@ -56,6 +57,15 @@
           </div>
         </div>
       </form>
+    </div>
+    <div data-view="entries" class="container entries hidden">
+      <div class="row">
+        <div class="column-full entries-header">
+          <h2 class="inline">Entries</h2>
+          <a href="#" class="new">NEW</a>
+        </div>
+      </div>
+      <ul></ul>
     </div>
   </main>
   <script src="js/data.js"></script>

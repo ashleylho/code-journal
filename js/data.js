@@ -13,3 +13,8 @@ function beforeUnload(event) {
   var dataJSON = JSON.stringify(data);
   window.localStorage.setItem('data-model', dataJSON);
 }
+
+var previousDataJSON = localStorage.getItem('data-model');
+if (previousDataJSON !== null) {
+  data = JSON.parse(previousDataJSON);
+}
