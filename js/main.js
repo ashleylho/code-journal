@@ -1,9 +1,6 @@
 var $image = document.querySelector('.image');
 var $imageLink = document.querySelector('.image-link');
 var $journalEntry = document.querySelector('form');
-var $newEntryContainer = document.querySelector('.new-entries');
-var $entriesContainer = document.querySelector('.entries');
-var $body = document.querySelector('body');
 
 // create entry
 
@@ -79,26 +76,37 @@ function renderEvent(event) {
 
 document.addEventListener('DOMContentLoaded', renderEvent);
 
+function prepend(event) {
+  $entryList.prepend(renderEntry(data.entries[0]));
+  $form.className = 'container new-entries';
+  $entries.className = 'container entries hidden';
+}
+
+$journalEntry.addEventListener('submit', prepend);
+
 // viewswapping
-$body.addEventListener('click', viewSwap);
 
-function viewSwap(event) {
-  var $view = document.querySelectorAll('[data-view]');
-  for (var i = 0; i < $view.length; i++) {
-    if ($view[i] === $entriesContainer) {
-      $newEntryContainer.className = 'container new-entries hidden';
-      $entriesContainer.className = 'container entries';
-    } else {
-      $entriesContainer.className = 'container entries hidden';
-      $newEntryContainer.className = 'container new-entries';
-    }
+var $form = document.querySelector('.entries');
+var $entriesLink = document.querySelector('.entries-link');
+var $entries = document.querySelector('.new-entries');
+var $new = document.querySelector('.new');
+var $save = document.querySelector('.save');
+
+$save.addEventListener('click', entriesView);
+$entriesLink.addEventListener('click', entriesView);
+
+function entriesView(event) {
+  if (event.target.matches('.entries-link')) {
+    $form.className = 'container new-entries';
+    $entries.className = 'container entries hidden';
   }
-  // if (event.target.matches('.save') || event.target.matches('.entries-link')) {
-  //   $newEntryContainer.className = 'container new-entries hidden';
-  //   $entriesContainer.className = 'container entries';
-  // } else {
-  //   $entriesContainer.className = 'container entries hidden';
-  //   $newEntryContainer.className = 'container new-entries';
-  // }
+}
 
+$new.addEventListener('click', formView);
+
+function formView(event) {
+  if (event.target.matches('.new')) {
+    $entries.className = 'container entries';
+    $form.className = 'container new-entries hidden';
+  }
 }
