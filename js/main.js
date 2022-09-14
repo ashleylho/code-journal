@@ -72,6 +72,15 @@ function renderEvent(event) {
   for (var i = 0; i < data.entries.length; i++) {
     $entryList.appendChild(renderEntry(data.entries[i]));
   }
+  if (data.view === 'entry-form') {
+    data.view = 'entry-form';
+    $entries.className = 'container entries';
+    $form.className = 'container new-entries hidden';
+  } else if (data.view === 'entries') {
+    data.view = 'entries';
+    $form.className = 'container new-entries';
+    $entries.className = 'container entries hidden';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', renderEvent);
