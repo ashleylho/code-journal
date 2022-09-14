@@ -34,6 +34,8 @@ function newEntry(event) {
 
 function renderEntry(entry) {
   var li = document.createElement('li');
+  // each rendered entry is given data-entry-id
+  li.setAttribute('data-entry-id', entry.id);
 
   var rowDiv = document.createElement('div');
   rowDiv.className = 'row entry';
@@ -58,6 +60,7 @@ function renderEntry(entry) {
   h2.appendChild(h2Text);
   columnDiv2.appendChild(h2);
 
+  // update function to include edit icon for each rendered entry
   var icon = document.createElement('i');
   icon.className = 'fas fa-pen';
   columnDiv2.appendChild(icon);
@@ -121,4 +124,11 @@ function formView(event) {
     $form.className = 'container new-entries hidden';
   }
   data.view = 'entry-form';
+}
+
+// listen for clicks on parent element of all rendered entries
+$entryList.addEventListener('click', edit);
+
+function edit(event) {
+
 }
