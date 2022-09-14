@@ -58,6 +58,10 @@ function renderEntry(entry) {
   h2.appendChild(h2Text);
   columnDiv2.appendChild(h2);
 
+  var icon = document.createElement('i');
+  icon.className = 'fas fa-pen';
+  columnDiv2.appendChild(icon);
+
   var p = document.createElement('p');
   var p2Text = document.createTextNode(entry.notes);
   p.appendChild(p2Text);
