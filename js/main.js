@@ -107,6 +107,7 @@ var $save = document.querySelector('.save');
 
 $save.addEventListener('click', entriesView);
 $entriesLink.addEventListener('click', entriesView);
+$new.addEventListener('click', formView);
 
 function entriesView(event) {
   if (event.target.matches('.entries-link')) {
@@ -116,10 +117,9 @@ function entriesView(event) {
   data.view = 'entries';
 }
 
-$new.addEventListener('click', formView);
-
 function formView(event) {
-  if (event.target.matches('.new')) {
+  // updated to show the entry form if an edit icon was clicked
+  if (event.target.matches('.new') || event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
   }
@@ -130,5 +130,5 @@ function formView(event) {
 $entryList.addEventListener('click', edit);
 
 function edit(event) {
-
+  formView(event);
 }
