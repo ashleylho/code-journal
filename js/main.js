@@ -56,7 +56,6 @@ function newEntry(event) {
   }
 }
 
-// $journalEntry.addEventListener('click', entriesView);
 // view entries
 
 function renderEntry(entry) {
