@@ -24,14 +24,26 @@ function newEntry(event) {
     notes: $notes.value,
     id: data.nextEntryId
   };
-
-  data.nextEntryId++;
-  data.entries.unshift(newObject);
-  $image.src = 'images/placeholder-image-square.jpg';
-  $journalEntry.reset();
-  prepend();
+  // update function to conditionally add a new entry object or update existing one
+  if (data.editing !== null) {
+    var $li = document.querySelectorAll('[data-entry-id]');
+    for (var i = 0; i < $li.length; i++) {
+      if (data.editing === data.entries[i]) {
+        data.entries[i].title = $titleInput.value;
+        data.entries[i].image = $imageLink.value;
+        data.entries[i].notes = $notes.value;
+      }
+    }
+  } else {
+    data.nextEntryId++;
+    data.entries.unshift(newObject);
+    $image.src = 'images/placeholder-image-square.jpg';
+    $journalEntry.reset();
+    prepend();
+  }
 }
 
+$journalEntry.addEventListener('click', entriesView);
 // view entries
 
 function renderEntry(entry) {
@@ -112,7 +124,7 @@ $entriesLink.addEventListener('click', entriesView);
 $new.addEventListener('click', formView);
 
 function entriesView(event) {
-  if (event.target.matches('.entries-link')) {
+  if (event.target.matches('.entries-link') || event.target.matches('.form')) {
     $form.className = 'container new-entries';
     $entries.className = 'container entries hidden';
   }
@@ -124,8 +136,10 @@ function formView(event) {
   if (event.target.matches('.new')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
+    // added code so that clicking on new clears all form entries
     $journalEntry.reset();
     $image.src = 'images/placeholder-image-square.jpg';
+    data.editing = null;
   } else if (event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
@@ -151,5 +165,4 @@ function edit(event) {
       $image.src = data.entries[i].image;
     }
   }
-
 }
