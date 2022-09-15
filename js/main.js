@@ -147,6 +147,7 @@ function entriesView(event) {
   data.view = 'entries';
 }
 
+var $modal = document.querySelector('.modal');
 function formView(event) {
   // updated to show the entry form if an edit icon was clicked
   if (event.target.matches('.new')) {
@@ -159,6 +160,10 @@ function formView(event) {
   } else if (event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
+  } else if (event.target.matches('.delete')) {
+    $entries.className = 'container entries';
+    $form.className = 'container new-entries hidden';
+    $modal.className = 'modal';
   }
   data.view = 'entry-form';
 }

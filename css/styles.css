@@ -63,6 +63,7 @@ textarea {
   display: block;
   float: right;
   margin-bottom: 15px;
+  font-size: 1rem;
 }
 
 .new {
@@ -119,4 +120,52 @@ i {
   border: none;
   background-color: transparent;
   font-size: 0.9rem;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(34, 34, 34, 0.9);
+}
+
+.confirm {
+  background-color: red;
+  color: white;
+  padding: 7px 10px;
+  border-radius: 0.2rem;
+  border: none;
+  font-size: 1rem;
+}
+
+.cancel {
+  padding: 7px 10px;
+  border-radius: 0.2rem;
+  border: none;
+  color: rgb(54, 53, 53);
+  background-color: rgb(182, 182, 182);
+  font-size: 1rem;
+}
+
+.window {
+  background-color: rgb(248, 248, 248);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 15px 20px 20px;
+  border-radius: 0.3rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+h3 {
+  font-size: 1rem;
 }
