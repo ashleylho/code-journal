@@ -5,6 +5,10 @@ var $titleInput = document.querySelector('.title-text');
 var $notes = document.querySelector('.notes-text');
 var $h2Edit = document.querySelector('.edit');
 var $h2New = document.querySelector('.new-entry');
+var $delete = document.querySelector('.delete');
+var $modal = document.querySelector('.modal');
+var $cancel = document.querySelector('.cancel');
+var $confirm = document.querySelector('.confirm');
 
 // create entry
 
@@ -50,9 +54,7 @@ function newEntry(event) {
       $form.className = 'container new-entries';
       $entries.className = 'container entries hidden';
     }
-    // added code to change h2 to new entry
-    $h2Edit.className = 'edit hidden';
-    $h2New.className = 'new-entry';
+    // added code to change h2 to new entry & hide delete button
   }
 }
 
@@ -134,6 +136,10 @@ var $save = document.querySelector('.save');
 $save.addEventListener('click', entriesView);
 $entriesLink.addEventListener('click', entriesView);
 $new.addEventListener('click', formView);
+// click target for deleting an entry to the entry form
+$delete.addEventListener('click', formView);
+$cancel.addEventListener('click', handleDelete);
+$confirm.addEventListener('click', handleDelete);
 
 function entriesView(event) {
   if (event.target.matches('.entries-link') || event.target.matches('.form')) {
@@ -148,6 +154,9 @@ function formView(event) {
   if (event.target.matches('.new')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
+    $delete.className = 'delete hidden';
+    $h2Edit.className = 'edit hidden';
+    $h2New.className = 'new-entry';
     // added code so that clicking on new clears all form entries
     $journalEntry.reset();
     $image.src = 'images/placeholder-image-square.jpg';
@@ -155,8 +164,43 @@ function formView(event) {
   } else if (event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
+    $h2Edit.className = 'edit';
+    $h2New.className = 'new-entry hidden';
+    // added code so that clicking on delete entry shows modal
+  } else if (event.target.matches('.delete')) {
+    $entries.className = 'container entries';
+    $form.className = 'container new-entries hidden';
+    $delete.className = 'delete';
+    $modal.className = 'modal';
   }
   data.view = 'entry-form';
+}
+
+function handleDelete(event) {
+  // show confirmation modal when user clicks delete entry target
+  $h2Edit.className = 'edit';
+  $h2New.className = 'new-entry hidden';
+  if (event.target.matches('.cancel')) {
+    // hide modal if user clicks cancel
+    $modal.className = 'modal hidden';
+    $delete.className = 'delete';
+    // shows entries list if user clicks delete/confirm
+  } else if (event.target.matches('.confirm')) {
+    $form.className = 'container new-entries';
+    $entries.className = 'container entries hidden';
+    $modal.className = 'modal hidden';
+    // removes the entry from data model and the entry's dom tree
+    var $li = document.querySelectorAll('[data-entry-id]');
+    for (var i = 0; i < $li.length; i++) {
+      if (data.editing === data.entries[i]) {
+        data.entries.splice(i, 1);
+        $li[i].remove();
+      }
+    }
+  }
+  if (data.view === 'entry-form') {
+    data.view = 'entries';
+  }
 }
 
 // listen for clicks on parent element of all rendered entries
@@ -164,9 +208,10 @@ $entryList.addEventListener('click', edit);
 
 function edit(event) {
   formView(event);
-  // added code to change view to edit entry
+  // added code to change view to edit entry & show delete entry
   $h2Edit.className = 'edit';
   $h2New.className = 'new-entry hidden';
+  $delete.className = 'delete';
   // find the matching entry object in the data model & assign it to the data model's editing property
   var $li = document.querySelectorAll('[data-entry-id]');
   var closestId = event.target.closest('[data-entry-id]');

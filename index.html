@@ -54,6 +54,7 @@
           <div class="column-full notes">
             <label for="notes">Notes</label>
             <textarea required id="notes" class="notes-text"></textarea>
+            <button class="delete hidden">Delete Entry</button>
             <button class="save">SAVE</button>
           </div>
         </div>
@@ -67,6 +68,15 @@
         </div>
       </div>
       <ul></ul>
+    </div>
+    <div class="modal hidden">
+      <div class="window">
+        <h3>Are you sure you want to delete this entry?</h3>
+        <div class="buttons">
+          <button class="cancel">CANCEL</button>
+          <button class="confirm">CONFIRM</button>
+        </div class=buttons>
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>
