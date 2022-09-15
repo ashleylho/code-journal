@@ -8,6 +8,7 @@ var $h2New = document.querySelector('.new-entry');
 var $delete = document.querySelector('.delete');
 var $modal = document.querySelector('.modal');
 var $cancel = document.querySelector('.cancel');
+var $confirm = document.querySelector('.confirm');
 
 // create entry
 
@@ -141,6 +142,7 @@ $new.addEventListener('click', formView);
 // click target for deleting an entry to the entry form
 $delete.addEventListener('click', handleDelete);
 $cancel.addEventListener('click', handleDelete);
+$confirm.addEventListener('click', handleDelete);
 
 function entriesView(event) {
   if (event.target.matches('.entries-link') || event.target.matches('.form')) {
@@ -171,8 +173,20 @@ function handleDelete(event) {
   if (event.target.matches('.delete')) {
     $modal.className = 'modal';
   } else if (event.target.matches('.cancel')) {
-  // hide modal if user clicks cancel
+    // hide modal if user clicks cancel
     $modal.className = 'modal hidden';
+    $delete.className = 'delete';
+  } else if (event.target.matches('.confirm')) {
+    $form.className = 'container new-entries';
+    $entries.className = 'container entries hidden';
+    $modal.className = 'modal hidden';
+    var $li = document.querySelectorAll('[data-entry-id]');
+    for (var i = 0; i < $li.length; i++) {
+      if (data.editing === data.entries[i]) {
+        data.entries.splice(i, 1);
+        $li[i].remove();
+      }
+    }
   }
 }
 
