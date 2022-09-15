@@ -3,6 +3,8 @@ var $imageLink = document.querySelector('.image-link');
 var $journalEntry = document.querySelector('form');
 var $titleInput = document.querySelector('.title-text');
 var $notes = document.querySelector('.notes-text');
+var $h2Edit = document.querySelector('.edit');
+var $h2New = document.querySelector('.new-entry');
 
 // create entry
 
@@ -25,25 +27,36 @@ function newEntry(event) {
     id: data.nextEntryId
   };
   // update function to conditionally add a new entry object or update existing one
-  if (data.editing !== null) {
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(newObject);
+    $image.src = 'images/placeholder-image-square.jpg';
+    $journalEntry.reset();
+    prepend();
+  } else {
     var $li = document.querySelectorAll('[data-entry-id]');
     for (var i = 0; i < $li.length; i++) {
       if (data.editing === data.entries[i]) {
         data.entries[i].title = $titleInput.value;
         data.entries[i].image = $imageLink.value;
         data.entries[i].notes = $notes.value;
+        // update the function to conditionally add a new entry DOM tree or replace the existing one
+        var update = renderEntry(data.entries[i]);
+        $li[i].replaceWith(update);
       }
     }
-  } else {
-    data.nextEntryId++;
-    data.entries.unshift(newObject);
-    $image.src = 'images/placeholder-image-square.jpg';
-    $journalEntry.reset();
-    prepend();
+    // updating function so 'save' button leads back to entries view
+    if (data.view === 'entries') {
+      $form.className = 'container new-entries';
+      $entries.className = 'container entries hidden';
+    }
+    // added code to change h2 to new entry
+    $h2Edit.className = 'edit hidden';
+    $h2New.className = 'new-entry';
   }
 }
 
-$journalEntry.addEventListener('click', entriesView);
+// $journalEntry.addEventListener('click', entriesView);
 // view entries
 
 function renderEntry(entry) {
@@ -152,6 +165,9 @@ $entryList.addEventListener('click', edit);
 
 function edit(event) {
   formView(event);
+  // added code to change view to edit entry
+  $h2Edit.className = 'edit';
+  $h2New.className = 'new-entry hidden';
   // find the matching entry object in the data model & assign it to the data model's editing property
   var $li = document.querySelectorAll('[data-entry-id]');
   var closestId = event.target.closest('[data-entry-id]');
