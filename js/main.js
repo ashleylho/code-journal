@@ -5,6 +5,7 @@ var $titleInput = document.querySelector('.title-text');
 var $notes = document.querySelector('.notes-text');
 var $h2Edit = document.querySelector('.edit');
 var $h2New = document.querySelector('.new-entry');
+var $delete = document.querySelector('.delete');
 
 // create entry
 
@@ -50,9 +51,10 @@ function newEntry(event) {
       $form.className = 'container new-entries';
       $entries.className = 'container entries hidden';
     }
-    // added code to change h2 to new entry
+    // added code to change h2 to new entry & hide delete button
     $h2Edit.className = 'edit hidden';
     $h2New.className = 'new-entry';
+    $delete.className = 'delete hidden';
   }
 }
 
@@ -134,6 +136,7 @@ var $save = document.querySelector('.save');
 $save.addEventListener('click', entriesView);
 $entriesLink.addEventListener('click', entriesView);
 $new.addEventListener('click', formView);
+$delete.addEventListener('click', entriesView);
 
 function entriesView(event) {
   if (event.target.matches('.entries-link') || event.target.matches('.form')) {
@@ -164,9 +167,10 @@ $entryList.addEventListener('click', edit);
 
 function edit(event) {
   formView(event);
-  // added code to change view to edit entry
+  // added code to change view to edit entry & show delete entry
   $h2Edit.className = 'edit';
   $h2New.className = 'new-entry hidden';
+  $delete.className = 'delete';
   // find the matching entry object in the data model & assign it to the data model's editing property
   var $li = document.querySelectorAll('[data-entry-id]');
   var closestId = event.target.closest('[data-entry-id]');

@@ -54,7 +54,7 @@ textarea {
   height: 8rem;
 }
 
-button {
+.save {
   background-color: #4b2373;
   color: white;
   padding: 5px 10px;
@@ -111,4 +111,12 @@ p {
 
 i {
   float: right;
+}
+
+.delete {
+  color: red;
+  text-decoration: underline;
+  border: none;
+  background-color: transparent;
+  font-size: 0.9rem;
 }
