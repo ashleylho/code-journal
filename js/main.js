@@ -55,9 +55,6 @@ function newEntry(event) {
       $entries.className = 'container entries hidden';
     }
     // added code to change h2 to new entry & hide delete button
-    $h2Edit.className = 'edit hidden';
-    $h2New.className = 'new-entry';
-    $delete.className = 'delete hidden';
   }
 }
 
@@ -140,7 +137,7 @@ $save.addEventListener('click', entriesView);
 $entriesLink.addEventListener('click', entriesView);
 $new.addEventListener('click', formView);
 // click target for deleting an entry to the entry form
-$delete.addEventListener('click', handleDelete);
+$delete.addEventListener('click', formView);
 $cancel.addEventListener('click', handleDelete);
 $confirm.addEventListener('click', handleDelete);
 
@@ -157,6 +154,9 @@ function formView(event) {
   if (event.target.matches('.new')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
+    $delete.className = 'delete hidden';
+    $h2Edit.className = 'edit hidden';
+    $h2New.className = 'new-entry';
     // added code so that clicking on new clears all form entries
     $journalEntry.reset();
     $image.src = 'images/placeholder-image-square.jpg';
@@ -164,22 +164,32 @@ function formView(event) {
   } else if (event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
+    $h2Edit.className = 'edit';
+    $h2New.className = 'new-entry hidden';
+    // added code so that clicking on delete entry shows modal
+  } else if (event.target.matches('.delete')) {
+    $entries.className = 'container entries';
+    $form.className = 'container new-entries hidden';
+    $delete.className = 'delete';
+    $modal.className = 'modal';
   }
   data.view = 'entry-form';
 }
 
 function handleDelete(event) {
   // show confirmation modal when user clicks delete entry target
-  if (event.target.matches('.delete')) {
-    $modal.className = 'modal';
-  } else if (event.target.matches('.cancel')) {
+  $h2Edit.className = 'edit';
+  $h2New.className = 'new-entry hidden';
+  if (event.target.matches('.cancel')) {
     // hide modal if user clicks cancel
     $modal.className = 'modal hidden';
     $delete.className = 'delete';
+    // shows entries list if user clicks delete/confirm
   } else if (event.target.matches('.confirm')) {
     $form.className = 'container new-entries';
     $entries.className = 'container entries hidden';
     $modal.className = 'modal hidden';
+    // removes the entry from data model and the entry's dom tree
     var $li = document.querySelectorAll('[data-entry-id]');
     for (var i = 0; i < $li.length; i++) {
       if (data.editing === data.entries[i]) {
@@ -187,6 +197,9 @@ function handleDelete(event) {
         $li[i].remove();
       }
     }
+  }
+  if (data.view === 'entry-form') {
+    data.view = 'entries';
   }
 }
 
