@@ -6,6 +6,8 @@ var $notes = document.querySelector('.notes-text');
 var $h2Edit = document.querySelector('.edit');
 var $h2New = document.querySelector('.new-entry');
 var $delete = document.querySelector('.delete');
+var $modal = document.querySelector('.modal');
+var $cancel = document.querySelector('.cancel');
 
 // create entry
 
@@ -137,7 +139,8 @@ $save.addEventListener('click', entriesView);
 $entriesLink.addEventListener('click', entriesView);
 $new.addEventListener('click', formView);
 // click target for deleting an entry to the entry form
-$delete.addEventListener('click', formView);
+$delete.addEventListener('click', handleDelete);
+$cancel.addEventListener('click', handleDelete);
 
 function entriesView(event) {
   if (event.target.matches('.entries-link') || event.target.matches('.form')) {
@@ -147,7 +150,6 @@ function entriesView(event) {
   data.view = 'entries';
 }
 
-var $modal = document.querySelector('.modal');
 function formView(event) {
   // updated to show the entry form if an edit icon was clicked
   if (event.target.matches('.new')) {
@@ -160,12 +162,18 @@ function formView(event) {
   } else if (event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
-  } else if (event.target.matches('.delete')) {
-    $entries.className = 'container entries';
-    $form.className = 'container new-entries hidden';
-    $modal.className = 'modal';
   }
   data.view = 'entry-form';
+}
+
+function handleDelete(event) {
+  // show confirmation modal when user clicks delete entry target
+  if (event.target.matches('.delete')) {
+    $modal.className = 'modal';
+  } else if (event.target.matches('.cancel')) {
+  // hide modal if user clicks cancel
+    $modal.className = 'modal hidden';
+  }
 }
 
 // listen for clicks on parent element of all rendered entries
