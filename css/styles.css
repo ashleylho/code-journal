@@ -89,6 +89,7 @@ ul {
 .entry-title {
   margin-top: 0;
   font-weight: 500;
+  display: inline;
 }
 
 p {
@@ -106,4 +107,8 @@ p {
 
 .entries-header {
   margin-top: 20px;
+}
+
+i {
+  float: right;
 }

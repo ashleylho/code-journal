@@ -1,6 +1,10 @@
 var $image = document.querySelector('.image');
 var $imageLink = document.querySelector('.image-link');
 var $journalEntry = document.querySelector('form');
+var $titleInput = document.querySelector('.title-text');
+var $notes = document.querySelector('.notes-text');
+var $h2Edit = document.querySelector('.edit');
+var $h2New = document.querySelector('.new-entry');
 
 // create entry
 
@@ -22,18 +26,42 @@ function newEntry(event) {
     notes: $notes.value,
     id: data.nextEntryId
   };
-
-  data.nextEntryId++;
-  data.entries.unshift(newObject);
-  $image.src = 'images/placeholder-image-square.jpg';
-  $journalEntry.reset();
-  prepend();
+  // update function to conditionally add a new entry object or update existing one
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(newObject);
+    $image.src = 'images/placeholder-image-square.jpg';
+    $journalEntry.reset();
+    prepend();
+  } else {
+    var $li = document.querySelectorAll('[data-entry-id]');
+    for (var i = 0; i < $li.length; i++) {
+      if (data.editing === data.entries[i]) {
+        data.entries[i].title = $titleInput.value;
+        data.entries[i].image = $imageLink.value;
+        data.entries[i].notes = $notes.value;
+        // update the function to conditionally add a new entry DOM tree or replace the existing one
+        var update = renderEntry(data.entries[i]);
+        $li[i].replaceWith(update);
+      }
+    }
+    // updating function so 'save' button leads back to entries view
+    if (data.view === 'entries') {
+      $form.className = 'container new-entries';
+      $entries.className = 'container entries hidden';
+    }
+    // added code to change h2 to new entry
+    $h2Edit.className = 'edit hidden';
+    $h2New.className = 'new-entry';
+  }
 }
 
 // view entries
 
 function renderEntry(entry) {
   var li = document.createElement('li');
+  // each rendered entry is given data-entry-id
+  li.setAttribute('data-entry-id', entry.id);
 
   var rowDiv = document.createElement('div');
   rowDiv.className = 'row entry';
@@ -57,6 +85,11 @@ function renderEntry(entry) {
   h2.className = 'entry-title';
   h2.appendChild(h2Text);
   columnDiv2.appendChild(h2);
+
+  // update function to include edit icon for each rendered entry
+  var icon = document.createElement('i');
+  icon.className = 'fas fa-pen';
+  columnDiv2.appendChild(icon);
 
   var p = document.createElement('p');
   var p2Text = document.createTextNode(entry.notes);
@@ -100,21 +133,51 @@ var $save = document.querySelector('.save');
 
 $save.addEventListener('click', entriesView);
 $entriesLink.addEventListener('click', entriesView);
+$new.addEventListener('click', formView);
 
 function entriesView(event) {
-  if (event.target.matches('.entries-link')) {
+  if (event.target.matches('.entries-link') || event.target.matches('.form')) {
     $form.className = 'container new-entries';
     $entries.className = 'container entries hidden';
   }
   data.view = 'entries';
 }
 
-$new.addEventListener('click', formView);
-
 function formView(event) {
+  // updated to show the entry form if an edit icon was clicked
   if (event.target.matches('.new')) {
+    $entries.className = 'container entries';
+    $form.className = 'container new-entries hidden';
+    // added code so that clicking on new clears all form entries
+    $journalEntry.reset();
+    $image.src = 'images/placeholder-image-square.jpg';
+    data.editing = null;
+  } else if (event.target.matches('i')) {
     $entries.className = 'container entries';
     $form.className = 'container new-entries hidden';
   }
   data.view = 'entry-form';
+}
+
+// listen for clicks on parent element of all rendered entries
+$entryList.addEventListener('click', edit);
+
+function edit(event) {
+  formView(event);
+  // added code to change view to edit entry
+  $h2Edit.className = 'edit';
+  $h2New.className = 'new-entry hidden';
+  // find the matching entry object in the data model & assign it to the data model's editing property
+  var $li = document.querySelectorAll('[data-entry-id]');
+  var closestId = event.target.closest('[data-entry-id]');
+  for (var i = 0; i < $li.length; i++) {
+    if (closestId === $li[i]) {
+      data.editing = data.entries[i];
+      // pre-populate the entry form with the clicked entry's values from the object found in the data model
+      $imageLink.value = data.entries[i].image;
+      $titleInput.value = data.entries[i].title;
+      $notes.value = data.entries[i].notes;
+      $image.src = data.entries[i].image;
+    }
+  }
 }
