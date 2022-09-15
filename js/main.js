@@ -136,7 +136,8 @@ var $save = document.querySelector('.save');
 $save.addEventListener('click', entriesView);
 $entriesLink.addEventListener('click', entriesView);
 $new.addEventListener('click', formView);
-$delete.addEventListener('click', entriesView);
+// click target for deleting an entry to the entry form
+$delete.addEventListener('click', formView);
 
 function entriesView(event) {
   if (event.target.matches('.entries-link') || event.target.matches('.form')) {
